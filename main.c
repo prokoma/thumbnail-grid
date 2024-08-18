@@ -1,4 +1,3 @@
-#include <asm-generic/errno-base.h>
 #include <libavcodec/avcodec.h>
 #include <libavcodec/codec_id.h>
 #include <libavcodec/packet.h>
@@ -38,7 +37,7 @@ int save_frame_to_webp(AVFrame *frame, const char *filename) {
                                   frame->linesize[0], quality, &output_data);
   if (output_size == 0) {
     fprintf(stderr, "Error encoding to WebP\n");
-    return -1;
+    return 1;
   }
 
   // Write the WebP data to a file
@@ -46,14 +45,12 @@ int save_frame_to_webp(AVFrame *frame, const char *filename) {
   if (!outfile) {
     fprintf(stderr, "Could not open output file %s\n", filename);
     WebPFree(output_data);
-    return -1;
+    return 1;
   }
   fwrite(output_data, output_size, 1, outfile);
   fclose(outfile);
 
-  // Free resources
   WebPFree(output_data);
-
   return 0;
 }
 

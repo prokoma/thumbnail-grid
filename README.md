@@ -17,5 +17,5 @@ sudo apt install libwebp-dev libavcodec-dev libavutil-dev libavformat-dev libsws
 ## Compiling
 
 ```bash
-make install
+make
 ```
