@@ -215,7 +215,7 @@ int main(int argc, char *argv[]) {
     int64_t seek_target_sec = av_rescale(seek_target, time_base.num, time_base.den);
 
     printf("processing frame %d/%d (at %02d:%02d:%02d)\n", i + 1, imgCount,
-           (int)(seek_target_sec / 3600), (int)(seek_target_sec / 60), (int)(seek_target_sec % 60));
+           (int)(seek_target_sec / 3600), (int)((seek_target_sec / 60) % 60), (int)(seek_target_sec % 60));
     if (av_seek_frame(inputCtx, videoStreamIdx, seek_target,
                       AVSEEK_FLAG_BACKWARD) < 0) {
       fprintf(stderr, "Error while seeking\n");
